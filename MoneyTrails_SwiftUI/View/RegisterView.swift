@@ -30,9 +30,17 @@ struct RegisterView: View {
                 VStack(spacing: 20){
                     // Register Text
                     HStack{
+                        Spacer()
                         Text("Sign up").font(.system(size: 30, weight: .bold))
                         Spacer()
-                    }.padding([.leading, .top, .bottom], 10)
+                    }.padding([.top, .bottom], 10)
+                    
+                    // Welcome Text
+                    HStack{
+                        Spacer()
+                        Text("Create your free account").font(.system(size: 20))
+                        Spacer()
+                    }.padding(.bottom, 10)
                     
                     // Name Textfield
                     RoundedRectangle(cornerRadius: 10)
@@ -87,12 +95,15 @@ struct RegisterView: View {
                         
                     }
                     
-                    
+                    // Login Text, Button
                     HStack{
                         Text("Already have an account?")
                             .font(.system(size: 20))
-                        Text("Login").foregroundColor(.blue)
-                            .font(.system(size: 20))
+                        NavigationLink(destination: LoginView(), label: {
+                            Text("Login").foregroundColor(.blue)
+                                .font(.system(size: 20))
+                        })
+                        
                     }
                     
                 }.padding()
