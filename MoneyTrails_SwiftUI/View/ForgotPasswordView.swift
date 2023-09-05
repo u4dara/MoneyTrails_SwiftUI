@@ -19,7 +19,7 @@ struct ForgotPasswordView: View {
                 // Gradiant Background
                 LinearGradient(colors: [Color("COrange"), Color("CPurple")], startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
-                    .frame(height: 300)
+                    .frame(height: 255)
                     .overlay{
                         VStack{
                             Image("ForgetPassword_Image").resizable()
@@ -35,7 +35,7 @@ struct ForgotPasswordView: View {
                         Spacer()
                         Text("Forget Password").font(.system(size: 30, weight: .bold))
                         Spacer()
-                    }.padding([.leading, .top, .bottom], 10)
+                    }
                     
                     // Instruction Text
                     Text("Please enter the email address associated with your account")

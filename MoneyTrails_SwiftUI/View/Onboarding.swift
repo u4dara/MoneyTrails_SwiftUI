@@ -34,7 +34,9 @@ struct Onboarding: View {
                                 
                                 
                                 VStack{
-                                    NavigationLink(destination: LoginView(), label: {
+                                    NavigationLink(
+                                        destination: LoginView().navigationBarBackButtonHidden(true),
+                                        label: {
                                         RoundedRectangle(cornerRadius: 10)
                                             .foregroundColor(Color("CBlue"))
                                             .frame(height: 50)
@@ -49,7 +51,9 @@ struct Onboarding: View {
                                     })
                                     
                                     
-                                    NavigationLink(destination: RegisterView(), label: {
+                                    NavigationLink(
+                                        destination: RegisterView().navigationBarBackButtonHidden(true),
+                                        label: {
                                         RoundedRectangle(cornerRadius: 10)
                                             .foregroundColor(.white)
                                             .frame(height: 50)

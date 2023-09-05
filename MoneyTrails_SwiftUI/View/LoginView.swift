@@ -33,9 +33,8 @@ struct LoginView: View {
                     HStack{
                         Spacer()
                         Text("Login").font(.system(size: 30, weight: .bold))
-                            .padding([.top], 10)
                         Spacer()
-                    }
+                    }.padding(.top, -5)
                     
                     
                     // Welcome Text
@@ -43,7 +42,7 @@ struct LoginView: View {
                         Spacer()
                         Text("Hello, Welcome back!").font(.system(size: 20))
                         Spacer()
-                    }.padding(.bottom, 10)
+                    }.padding(.top, -5)
                     
                     
                     // Email Textfield
@@ -66,8 +65,12 @@ struct LoginView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "lock").padding([.leading], 32).foregroundColor(.secondary)
-                                TextField("Password", text: $loginVM.password)
-                                Text("Forget?").foregroundColor(.blue).padding([.trailing], 10)
+                                SecureField("Password", text: $loginVM.password)
+                                NavigationLink {
+                                    ForgotPasswordView()
+                                } label: {
+                                    Text("Forget?").foregroundColor(.blue).padding([.trailing], 10)
+                                }
                             }
                         }
                     
@@ -92,9 +95,12 @@ struct LoginView: View {
                     HStack{
                         Text("New to MoneyTrail?")
                             .font(.system(size: 20))
-                        NavigationLink(destination: RegisterView(), label: {
+                        NavigationLink(
+                            destination: RegisterView().navigationBarBackButtonHidden(true),
+                            label: {
                             Text("Sign in").foregroundColor(.blue)
                                 .font(.system(size: 20))
+                                .bold()
                         })
                         
                     }

@@ -33,14 +33,14 @@ struct RegisterView: View {
                         Spacer()
                         Text("Sign up").font(.system(size: 30, weight: .bold))
                         Spacer()
-                    }.padding([.top, .bottom], 10)
+                    }.padding(.top, -5)
                     
                     // Welcome Text
                     HStack{
                         Spacer()
                         Text("Create your free account").font(.system(size: 20))
                         Spacer()
-                    }.padding(.bottom, 10)
+                    }.padding(.top, -5)
                     
                     // Name Textfield
                     RoundedRectangle(cornerRadius: 10)
@@ -50,7 +50,7 @@ struct RegisterView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "person.crop.circle").padding([.leading], 30).foregroundColor(.secondary)
-                                TextField("Name", text: $loginVM.email)
+                                TextField("Name", text: $loginVM.name)
                             }
                         }
                     
@@ -75,7 +75,7 @@ struct RegisterView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "lock").padding([.leading], 30).foregroundColor(.secondary)
-                                TextField("Password", text: $loginVM.email)
+                                SecureField("Password", text: $loginVM.password)
                             }
                         }
                     
@@ -99,9 +99,12 @@ struct RegisterView: View {
                     HStack{
                         Text("Already have an account?")
                             .font(.system(size: 20))
-                        NavigationLink(destination: LoginView(), label: {
+                        NavigationLink(
+                            destination: LoginView().navigationBarBackButtonHidden(true),
+                            label: {
                             Text("Login").foregroundColor(.blue)
                                 .font(.system(size: 20))
+                                .bold()
                         })
                         
                     }

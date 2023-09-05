@@ -16,6 +16,8 @@
 		402FD1F52AA6015300C344EB /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402FD1F42AA6015200C344EB /* Dashboard.swift */; };
 		402FD1F72AA6051700C344EB /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402FD1F62AA6051700C344EB /* Onboarding.swift */; };
 		404CBE912AA7297C00C90F3C /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404CBE902AA7297C00C90F3C /* ForgotPasswordView.swift */; };
+		404CBE932AA748D300C90F3C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404CBE922AA748D300C90F3C /* ProfileView.swift */; };
+		404CBE952AA7536700C90F3C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404CBE942AA7536700C90F3C /* UserModel.swift */; };
 		40A93EB42AA4D7A20047E631 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A93EB32AA4D7A20047E631 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,8 @@
 		402FD1F42AA6015200C344EB /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		402FD1F62AA6051700C344EB /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		404CBE902AA7297C00C90F3C /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		404CBE922AA748D300C90F3C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		404CBE942AA7536700C90F3C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40A93EB32AA4D7A20047E631 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +89,7 @@
 		40A93EAF2AA4D7690047E631 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				404CBE942AA7536700C90F3C /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -97,6 +102,7 @@
 				402FD1F42AA6015200C344EB /* Dashboard.swift */,
 				402FD1F62AA6051700C344EB /* Onboarding.swift */,
 				404CBE902AA7297C00C90F3C /* ForgotPasswordView.swift */,
+				404CBE922AA748D300C90F3C /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,12 +186,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				402FD1EF2AA5F89200C344EB /* LoginViewModel.swift in Sources */,
+				404CBE932AA748D300C90F3C /* ProfileView.swift in Sources */,
 				402FD1F12AA5FECD00C344EB /* RegisterView.swift in Sources */,
 				404CBE912AA7297C00C90F3C /* ForgotPasswordView.swift in Sources */,
 				40A93EB42AA4D7A20047E631 /* LoginView.swift in Sources */,
 				402FD1F72AA6051700C344EB /* Onboarding.swift in Sources */,
 				40047A9B2AA4D3CB007D0816 /* ContentView.swift in Sources */,
 				402FD1F52AA6015300C344EB /* Dashboard.swift in Sources */,
+				404CBE952AA7536700C90F3C /* UserModel.swift in Sources */,
 				40047A992AA4D3CB007D0816 /* MoneyTrails_SwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
