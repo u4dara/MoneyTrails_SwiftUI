@@ -9,7 +9,10 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @StateObject var loginVM : LoginViewModel = LoginViewModel()
+    @State private var email = ""
+    @State private var password = ""
+    
+    @EnvironmentObject var viewModel : AuthViewModel
     
     var body: some View {
         ZStack{
@@ -27,7 +30,7 @@ struct LoginView: View {
                         }
                     }
                 
-                VStack(spacing: 20){
+                VStack(spacing: 10){
                     
                     // Login Text
                     HStack{
@@ -42,7 +45,7 @@ struct LoginView: View {
                         Spacer()
                         Text("Hello, Welcome back!").font(.system(size: 20))
                         Spacer()
-                    }.padding(.top, -5)
+                    }.padding(.bottom, 5)
                     
                     
                     // Email Textfield
@@ -53,7 +56,7 @@ struct LoginView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "envelope").padding([.leading], 30).foregroundColor(.secondary)
-                                TextField("Email", text: $loginVM.email)
+                                TextField("Email", text: $email)
                             }
                         }
                     
@@ -65,7 +68,7 @@ struct LoginView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "lock").padding([.leading], 32).foregroundColor(.secondary)
-                                SecureField("Password", text: $loginVM.password)
+                                SecureField("Password", text: $password)
                                 NavigationLink {
                                     ForgotPasswordView()
                                 } label: {
@@ -77,7 +80,9 @@ struct LoginView: View {
                     
                     // Login Button
                     Button {
-                        
+                        Task{
+                            try await viewModel.signIn(withEmail: email, password: password)
+                        }
                     } label: {
                         
                         ZStack {

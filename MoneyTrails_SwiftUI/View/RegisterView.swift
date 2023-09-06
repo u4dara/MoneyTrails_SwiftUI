@@ -9,7 +9,12 @@ import SwiftUI
 
 struct RegisterView: View {
     
-    @StateObject var loginVM : LoginViewModel = LoginViewModel()
+    @State private var name = ""
+    @State private var email = ""
+    @State private var password = ""
+    @State private var confirmPassword = ""
+    
+    @EnvironmentObject var viewModel : AuthViewModel
     
     var body: some View {
         ZStack{
@@ -27,7 +32,7 @@ struct RegisterView: View {
                         }
                     }
                 
-                VStack(spacing: 20){
+                VStack(spacing: 10){
                     // Register Text
                     HStack{
                         Spacer()
@@ -40,7 +45,7 @@ struct RegisterView: View {
                         Spacer()
                         Text("Create your free account").font(.system(size: 20))
                         Spacer()
-                    }.padding(.top, -5)
+                    }.padding(.bottom, 5)
                     
                     // Name Textfield
                     RoundedRectangle(cornerRadius: 10)
@@ -50,7 +55,7 @@ struct RegisterView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "person.crop.circle").padding([.leading], 30).foregroundColor(.secondary)
-                                TextField("Name", text: $loginVM.name)
+                                TextField("Name", text: $name)
                             }
                         }
                     
@@ -63,7 +68,7 @@ struct RegisterView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "envelope").padding([.leading], 30).foregroundColor(.secondary)
-                                TextField("Email", text: $loginVM.email)
+                                TextField("Email", text: $email)
                             }
                         }
                     
@@ -75,13 +80,28 @@ struct RegisterView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "lock").padding([.leading], 30).foregroundColor(.secondary)
-                                SecureField("Password", text: $loginVM.password)
+                                SecureField("Password", text: $password)
                             }
                         }
                     
+                    // Password Confirmation Textfield
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color("TextBackground"))
+                        .frame(height: 50)
+                        .shadow(color: .gray, radius: 1)
+                        .overlay{
+                            HStack{
+                                Image(systemName: "lock").padding([.leading], 30).foregroundColor(.secondary)
+                                SecureField("Confirm Password", text: $confirmPassword)
+                            }
+                        }
+                    
+                    
                     // Sign in Button
                     Button {
-                        
+                        Task {
+                            try await viewModel.createUser(withEmail: email, password: password, fullname: name)
+                        }
                     } label: {
                         
                         ZStack {
