@@ -93,6 +93,22 @@ struct RegisterView: View {
                             HStack{
                                 Image(systemName: "lock").padding([.leading], 30).foregroundColor(.secondary)
                                 SecureField("Confirm Password", text: $confirmPassword)
+                                if !password.isEmpty && !confirmPassword.isEmpty {
+                                    if password == confirmPassword {
+                                        Image(systemName: "checkmark.circle")
+                                            .imageScale(.large)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.green)
+                                            .padding(.trailing, 20)
+                                    }
+                                    else{
+                                        Image(systemName: "xmark.circle")
+                                            .imageScale(.large)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.red)
+                                            .padding(.trailing, 20)
+                                    }
+                                }
                             }
                         }
                     
@@ -112,6 +128,8 @@ struct RegisterView: View {
                                 .foregroundColor(.white)
                                 .bold()
                         }
+                        .disabled(!formIsValid)
+                        .opacity(formIsValid ? 1.0 : 0.5)
                         
                     }
                     
@@ -137,6 +155,20 @@ struct RegisterView: View {
             }
         }
     }
+}
+
+// Form Validation Parameters
+extension RegisterView : AuthenticationFormProtocol {
+    var formIsValid: Bool {
+        return !email.isEmpty
+        && !name.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password == confirmPassword
+        && password.count > 5
+    }
+    
+    
 }
 
 struct RegisterView_Previews: PreviewProvider {

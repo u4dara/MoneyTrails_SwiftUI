@@ -58,7 +58,7 @@ struct ProfileView: View {
                 
                 Section("Account"){
                     Button {
-                        print("Sign out")
+                        viewModel.signOut()
                     } label: {
                         HStack(spacing: 12){
                             Image(systemName: "arrow.left.circle.fill")
