@@ -17,7 +17,7 @@ struct SettingsView: View {
                 Section("Categories"){
                     // All Categories Tab Item
                     NavigationLink {
-                        
+                        CategoriesView()
                     } label: {
                         HStack(spacing: 12) {
                             Image(systemName: "tag.circle.fill")
@@ -45,38 +45,64 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section("Account"){
-                    Button {
-                        viewModel.signOut()
-                    } label: {
-                        HStack(spacing: 12){
-                            Image(systemName: "arrow.left.circle.fill")
-                                .imageScale(.small)
+                if let user = viewModel.currentUser {
+                    Section("Account"){
+                        HStack(spacing: 15) {
+                            Text(user.initials)
                                 .font(.title)
-                                .foregroundColor(.red)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                                .frame(width: 72, height: 72)
+                                .background(Color(.systemGray3))
+                            .clipShape(Circle())
                             
-                            Text("Sign out")
-                                .font(.headline)
-                                .foregroundColor(.black)
+                            VStack(alignment: .leading, spacing: 4){
+                                Text(user.fullName)
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .padding(.top, 4)
+                                
+                                Text(user.email)
+                                    .font(.footnote)
+                                    .foregroundColor(.gray)
+                            }
                         }
-                    }
-                    
-                    Button {
-                        print("Sign out")
-                    } label: {
-                        HStack(spacing: 12){
-                            Image(systemName: "xmark.bin.circle.fill")
-                                .imageScale(.small)
-                                .font(.title)
-                                .foregroundColor(.red)
-                            
-                            Text("Delete Account")
-                                .font(.headline)
-                                .foregroundColor(.black)
-                        }
-                    }
 
+                        
+                        Button {
+                            viewModel.signOut()
+                        } label: {
+                            HStack(spacing: 12){
+                                Image(systemName: "arrow.left.circle.fill")
+                                    .imageScale(.small)
+                                    .font(.title)
+                                    .foregroundColor(.red)
+                                
+                                Text("Sign out")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        
+                        Button {
+                            print("Sign out")
+                        } label: {
+                            HStack(spacing: 12){
+                                Image(systemName: "xmark.bin.circle.fill")
+                                    .imageScale(.small)
+                                    .font(.title)
+                                    .foregroundColor(.red)
+                                
+                                Text("Delete Account")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                            }
+                        }
+
+                    }
                 }
+                
+                
                 
                 
                 Section("App"){

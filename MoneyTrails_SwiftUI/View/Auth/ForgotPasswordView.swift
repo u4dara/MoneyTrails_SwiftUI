@@ -52,6 +52,8 @@ struct ForgotPasswordView: View {
                             HStack{
                                 Image(systemName: "envelope").padding([.leading], 30).foregroundColor(.secondary)
                                 TextField("Email", text: $email)
+                                    .textInputAutocapitalization(.never)
+                                        .disableAutocorrection(true)
                             }
                         }
                     
@@ -68,7 +70,7 @@ struct ForgotPasswordView: View {
                                 .font(.system(size: 24))
                                 .foregroundColor(.white)
                                 .bold()
-                        }.padding(.top, 10)
+                        }
                         
                     }
                     

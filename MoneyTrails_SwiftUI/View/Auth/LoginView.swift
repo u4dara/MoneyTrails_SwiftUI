@@ -57,6 +57,9 @@ struct LoginView: View {
                             HStack{
                                 Image(systemName: "envelope").padding([.leading], 30).foregroundColor(.secondary)
                                 TextField("Email", text: $email)
+                                    .keyboardType(.emailAddress)
+                                    .textInputAutocapitalization(.never)
+                                    .disableAutocorrection(true)
                             }
                         }
                     
@@ -69,6 +72,8 @@ struct LoginView: View {
                             HStack{
                                 Image(systemName: "lock").padding([.leading], 32).foregroundColor(.secondary)
                                 SecureField("Password", text: $password)
+                                    .textInputAutocapitalization(.never)
+                                        .disableAutocorrection(true)
                                 NavigationLink {
                                     ForgotPasswordView()
                                 } label: {

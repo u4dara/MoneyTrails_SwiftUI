@@ -56,6 +56,7 @@ struct RegisterView: View {
                             HStack{
                                 Image(systemName: "person.crop.circle").padding([.leading], 30).foregroundColor(.secondary)
                                 TextField("Name", text: $name)
+                                        .disableAutocorrection(true)
                             }
                         }
                     
@@ -69,6 +70,9 @@ struct RegisterView: View {
                             HStack{
                                 Image(systemName: "envelope").padding([.leading], 30).foregroundColor(.secondary)
                                 TextField("Email", text: $email)
+                                    .keyboardType(.emailAddress)
+                                    .textInputAutocapitalization(.never)
+                                    .disableAutocorrection(true)
                             }
                         }
                     
@@ -81,6 +85,8 @@ struct RegisterView: View {
                             HStack{
                                 Image(systemName: "lock").padding([.leading], 30).foregroundColor(.secondary)
                                 SecureField("Password", text: $password)
+                                    .textInputAutocapitalization(.never)
+                                        .disableAutocorrection(true)
                             }
                         }
                     
@@ -93,6 +99,8 @@ struct RegisterView: View {
                             HStack{
                                 Image(systemName: "lock").padding([.leading], 30).foregroundColor(.secondary)
                                 SecureField("Confirm Password", text: $confirmPassword)
+                                    .textInputAutocapitalization(.never)
+                                        .disableAutocorrection(true)
                                 if !password.isEmpty && !confirmPassword.isEmpty {
                                     if password == confirmPassword {
                                         Image(systemName: "checkmark.circle")

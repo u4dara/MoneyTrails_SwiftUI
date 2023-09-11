@@ -26,6 +26,9 @@
 		404CBEA02AA7825700C90F3C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 404CBE9F2AA7825700C90F3C /* FirebaseStorage */; };
 		404CBEA22AA782B900C90F3C /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404CBEA12AA782B900C90F3C /* AuthViewModel.swift */; };
 		409F3D3D2AAF59F000967995 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409F3D3C2AAF59F000967995 /* SettingsView.swift */; };
+		409F3D3F2AAF6C4F00967995 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409F3D3E2AAF6C4F00967995 /* CategoriesView.swift */; };
+		409F3D442AAF80B900967995 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409F3D432AAF80B900967995 /* CategoryModel.swift */; };
+		409F3D462AAF8B3A00967995 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409F3D452AAF8B3A00967995 /* CategoryViewModel.swift */; };
 		40A93EB42AA4D7A20047E631 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A93EB32AA4D7A20047E631 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +49,9 @@
 		404CBE962AA7805B00C90F3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		404CBEA12AA782B900C90F3C /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		409F3D3C2AAF59F000967995 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		409F3D3E2AAF6C4F00967995 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		409F3D432AAF80B900967995 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		409F3D452AAF8B3A00967995 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		40A93EB32AA4D7A20047E631 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,10 +109,42 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		409F3D402AAF744D00967995 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				40A93EB32AA4D7A20047E631 /* LoginView.swift */,
+				402FD1F02AA5FECD00C344EB /* RegisterView.swift */,
+				402FD1F62AA6051700C344EB /* Onboarding.swift */,
+				404CBE902AA7297C00C90F3C /* ForgotPasswordView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		409F3D412AAF749100967995 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				409F3D422AAF74D600967995 /* SubViews */,
+				401BD13A2AAF51E8003AC0E3 /* ExpensesView.swift */,
+				401BD13C2AAF54AC003AC0E3 /* Dashboard.swift */,
+				401BD13E2AAF56F2003AC0E3 /* ReportsView.swift */,
+				409F3D3C2AAF59F000967995 /* SettingsView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		409F3D422AAF74D600967995 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				409F3D3E2AAF6C4F00967995 /* CategoriesView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		40A93EAF2AA4D7690047E631 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				404CBE942AA7536700C90F3C /* UserModel.swift */,
+				409F3D432AAF80B900967995 /* CategoryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -114,15 +152,9 @@
 		40A93EB12AA4D77F0047E631 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				40A93EB32AA4D7A20047E631 /* LoginView.swift */,
-				402FD1F02AA5FECD00C344EB /* RegisterView.swift */,
-				402FD1F62AA6051700C344EB /* Onboarding.swift */,
-				404CBE902AA7297C00C90F3C /* ForgotPasswordView.swift */,
+				409F3D412AAF749100967995 /* Dashboard */,
+				409F3D402AAF744D00967995 /* Auth */,
 				404CBE922AA748D300C90F3C /* ProfileView.swift */,
-				401BD13A2AAF51E8003AC0E3 /* ExpensesView.swift */,
-				401BD13C2AAF54AC003AC0E3 /* Dashboard.swift */,
-				401BD13E2AAF56F2003AC0E3 /* ReportsView.swift */,
-				409F3D3C2AAF59F000967995 /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -131,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				404CBEA12AA782B900C90F3C /* AuthViewModel.swift */,
+				409F3D452AAF8B3A00967995 /* CategoryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -223,10 +256,13 @@
 				40A93EB42AA4D7A20047E631 /* LoginView.swift in Sources */,
 				402FD1F72AA6051700C344EB /* Onboarding.swift in Sources */,
 				40047A9B2AA4D3CB007D0816 /* ContentView.swift in Sources */,
+				409F3D3F2AAF6C4F00967995 /* CategoriesView.swift in Sources */,
 				404CBEA22AA782B900C90F3C /* AuthViewModel.swift in Sources */,
 				404CBE952AA7536700C90F3C /* UserModel.swift in Sources */,
 				401BD13F2AAF56F2003AC0E3 /* ReportsView.swift in Sources */,
+				409F3D462AAF8B3A00967995 /* CategoryViewModel.swift in Sources */,
 				40047A992AA4D3CB007D0816 /* MoneyTrails_SwiftUIApp.swift in Sources */,
+				409F3D442AAF80B900967995 /* CategoryModel.swift in Sources */,
 				409F3D3D2AAF59F000967995 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
