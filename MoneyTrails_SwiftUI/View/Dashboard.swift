@@ -2,30 +2,33 @@
 //  Dashboard.swift
 //  MoneyTrails_SwiftUI
 //
-//  Created by Udara Sachinthana on 2023-09-04.
+//  Created by Udara Sachinthana on 2023-09-11.
 //
 
 import SwiftUI
 
 struct Dashboard: View {
-    
-    @StateObject var loginVM : LoginViewModel = LoginViewModel()
-    
     var body: some View {
-        ZStack{
-            Color.blue.ignoresSafeArea(.all)
-
-            VStack {
-                Text("Text")
-                HStack {
-                    Image(systemName: "person.circle.fill")
-                    TextField("Username", text: $loginVM.name)
-                }.padding()
-                    .background(
-                    RoundedRectangle(cornerRadius: 10).foregroundColor(.white))
-
-            }.padding()
+        TabView {
+            ExpensesView()
+                .tabItem{
+                    Label("Expenses", systemImage: "tray.and.arrow.up.fill")
+                }
             
+            ReportsView()
+                .tabItem{
+                    Label("Reports", systemImage: "chart.bar.fill")
+                }
+            
+            Text("")
+                .tabItem{
+                    Label("Add", systemImage: "plus")
+                }
+            
+            SettingsView()
+                .tabItem{
+                    Label("Settings", systemImage: "gearshape.fill")
+                }
         }
     }
 }

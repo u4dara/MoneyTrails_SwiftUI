@@ -9,8 +9,6 @@ import SwiftUI
 
 struct Onboarding: View {
     
-    @StateObject var loginVM : LoginViewModel = LoginViewModel()
-    
     var body: some View {
         NavigationView{
             ZStack{

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     
-    @StateObject var loginVM : LoginViewModel = LoginViewModel()
+    @State private var email = ""
     
     var body: some View {
         ZStack{
@@ -51,7 +51,7 @@ struct ForgotPasswordView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "envelope").padding([.leading], 30).foregroundColor(.secondary)
-                                TextField("Email", text: $loginVM.email)
+                                TextField("Email", text: $email)
                             }
                         }
                     
