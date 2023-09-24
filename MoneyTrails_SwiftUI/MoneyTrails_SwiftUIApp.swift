@@ -13,7 +13,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
-      let db = Firestore.firestore()
     return true
   }
 }
@@ -23,11 +22,13 @@ struct MoneyTrails_SwiftUIApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @StateObject var viewModel = AuthViewModel()
+    @StateObject var categoryViewModel = CategoryViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(viewModel)
+                .environmentObject(categoryViewModel)
         }
     }
 }
