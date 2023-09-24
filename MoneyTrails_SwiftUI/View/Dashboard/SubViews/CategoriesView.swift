@@ -7,6 +7,8 @@
 
 import SwiftUI
 import FirebaseFirestore
+import Firebase
+import FirebaseAuth
 
 struct CategoriesView: View {
     
@@ -16,11 +18,6 @@ struct CategoriesView: View {
     @State private var categoryName = ""
     @State private var newCategoryColor = Color.red
     @State private var categories: [FirestoreCategory] = []
-
-    
-    func deleteCategory(at offsets: IndexSet){
-        
-    }
     
     struct RGBColor {
         let red: Double
@@ -33,7 +30,7 @@ struct CategoriesView: View {
         let color: RGBColor
     }
 
-    func writeColorToFirestore(selectedColor: Color, textField: String) async throws {
+    func addCategories(selectedColor: Color, textField: String) async throws {
         // Convert SwiftUI Color to RGB values
         let uiColor = UIColor(selectedColor)
         var red: CGFloat = 0.0
@@ -47,51 +44,74 @@ struct CategoriesView: View {
         let db = Firestore.firestore()
         let colorsCollection = db.collection("categories")
         
-        let colorData = [
-            "red": rgbColor.red,
-            "green": rgbColor.green,
-            "blue": rgbColor.blue
-        ]
-        
-        // Use Firestore's asynchronous method to add the document
-        do {
-            _ = try await colorsCollection.addDocument(data: [
-                "categoryName" : textField,
-                "color" : colorData
-            ])
-            print("Color added to Firestore successfully!")
-        } catch {
-            throw error
+        if let currentUser = Auth.auth().currentUser {
+            let userID = currentUser.uid
+            
+            let colorData = [
+                "red": rgbColor.red,
+                "green": rgbColor.green,
+                "blue": rgbColor.blue
+            ]
+            
+            // Use Firestore's asynchronous method to add the document
+            do {
+                _ = try await colorsCollection.addDocument(data: [
+                    "userID": userID,
+                    "categoryName" : textField,
+                    "color" : colorData
+                ])
+                print("Color added to Firestore successfully!")
+            } catch {
+                throw error
+            }
+            
         }
+        else {
+            // No user is signed in, handle this case as needed
+            print("No user is signed in.")
+        }
+        
+        
     }
     
     // Retrieve categories from db
-    func retrieveDataFromFirestoreAsync() async throws -> [FirestoreCategory] {
+    func retrieveCategories() async throws -> [FirestoreCategory] {
         let db = Firestore.firestore()
         let colorsCollection = db.collection("categories")
         
-        do {
-            let querySnapshot = try await colorsCollection.getDocuments()
-            var categories: [FirestoreCategory] = []
+        if let currentUser = Auth.auth().currentUser {
+            let userID = currentUser.uid
             
-            for document in querySnapshot.documents {
-                let data = document.data()
-                if let categoryName = data["categoryName"] as? String,
-                   let colorData = data["color"] as? [String: Double],
-                   let red = colorData["red"],
-                   let green = colorData["green"],
-                   let blue = colorData["blue"] {
-                    let rgbColor = RGBColor(red: red, green: green, blue: blue)
-                    let firestoreCategory = FirestoreCategory(categoryName: categoryName, color: rgbColor)
-                    categories.append(firestoreCategory)
+            // Create a query to retrieve documents where the 'userID' field matches the current user's UID
+            let query = colorsCollection.whereField("userID", isEqualTo: userID)
+            
+            do {
+                let querySnapshot = try await query.getDocuments()
+                var categories: [FirestoreCategory] = []
+                
+                for document in querySnapshot.documents {
+                    let data = document.data()
+                    if let categoryName = data["categoryName"] as? String,
+                       let colorData = data["color"] as? [String: Double],
+                       let red = colorData["red"],
+                       let green = colorData["green"],
+                       let blue = colorData["blue"] {
+                        let rgbColor = RGBColor(red: red, green: green, blue: blue)
+                        let firestoreCategory = FirestoreCategory(categoryName: categoryName, color: rgbColor)
+                        categories.append(firestoreCategory)
+                    }
                 }
+                
+                return categories
+            } catch {
+                throw error
             }
-            
-            return categories
-        } catch {
-            throw error
+        } else {
+            // No user is signed in, handle this case as needed
+            throw ErrorType.userNotLoggedIn
         }
     }
+
 
 
     
@@ -111,7 +131,7 @@ struct CategoriesView: View {
             }.onAppear{
                 Task {
                         do {
-                            categories = try await retrieveDataFromFirestoreAsync()
+                            categories = try await retrieveCategories()
                             print (categories)
                         } catch {
                             print("Error retrieving categories: \(error)")
@@ -158,10 +178,9 @@ struct CategoriesView: View {
                 // Add Category button
                 HStack{
                     Button{
-                        categoryName = ""
                         Task {
                                 do {
-                                    try await writeColorToFirestore(selectedColor: newCategoryColor, textField: categoryName)
+                                    try await addCategories(selectedColor: newCategoryColor, textField: categoryName)
                                 } catch {
                                     print("Error writing color to Firestore: \(error.localizedDescription)")
                                 }
@@ -194,4 +213,8 @@ struct CategoriesView_Previews: PreviewProvider {
     static var previews: some View {
         CategoriesView()
     }
+}
+
+enum ErrorType: Error {
+    case userNotLoggedIn
 }
