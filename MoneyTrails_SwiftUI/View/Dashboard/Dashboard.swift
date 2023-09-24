@@ -20,7 +20,7 @@ struct Dashboard: View {
                     Label("Reports", systemImage: "chart.bar.fill")
                 }
             
-            Text("")
+            AddExpenseView()
                 .tabItem{
                     Label("Add", systemImage: "plus")
                 }

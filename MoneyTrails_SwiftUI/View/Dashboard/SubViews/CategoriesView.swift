@@ -28,6 +28,21 @@ struct CategoriesView: View {
                             
                         Text(category.categoryName)
                             .font(.headline)
+                        
+                        Spacer()
+                        
+                        Button{
+                            Task {
+                                    do {
+                                        try await CategoryviewModel.deleteCategory(category)
+                                    } catch {
+                                        print("Error deleting category: \(error.localizedDescription)")
+                                    }
+                                }
+                        }label: {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                        }
                     }
                 
                 

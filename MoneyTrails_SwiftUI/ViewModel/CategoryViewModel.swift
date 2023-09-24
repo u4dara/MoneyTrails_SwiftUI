@@ -115,4 +115,44 @@ class CategoryViewModel : ObservableObject {
             }
         }
     
+    
+    //Delete Category from the Database
+    func deleteCategory(_ category: Category) async throws {
+            // Remove the category from the local array
+            if let index = categories.firstIndex(where: { $0.categoryName == category.categoryName }) {
+                categories.remove(at: index)
+            }
+
+            // Add code here to delete the category from Firestore
+            let db = Firestore.firestore()
+            let currentUser = Auth.auth().currentUser
+
+            // Check if a user is logged in
+        if (currentUser?.uid) != nil {
+                // Get a reference to the 'categories' collection
+                let categoriesCollection = db.collection("categories")
+
+                // Create a query to find the category document based on some criteria (e.g., categoryName)
+                let query = categoriesCollection.whereField("categoryName", isEqualTo: category.categoryName)
+                
+                do {
+                    // Use await to retrieve the query snapshot
+                    let querySnapshot = try await query.getDocuments()
+                    
+                    // Check if there are any matching documents
+                    if !querySnapshot.isEmpty {
+                        // Assuming there's only one matching document, delete it
+                        let categoryDocument = querySnapshot.documents[0]
+                        try await categoryDocument.reference.delete()
+                        print("Category deleted successfully.")
+                        updateCategories()
+                    }
+                } catch {
+                    throw error // Rethrow any errors that occur during the deletion
+                }
+            } else {
+                print("No user is signed in.")
+            }
+        }
+    
 }

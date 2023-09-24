@@ -23,12 +23,15 @@ struct MoneyTrails_SwiftUIApp: App {
     
     @StateObject var viewModel = AuthViewModel()
     @StateObject var categoryViewModel = CategoryViewModel()
+    @StateObject var addExpenseViewModel = AddExpenseViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(viewModel)
                 .environmentObject(categoryViewModel)
+                .environmentObject(addExpenseViewModel)
+                
         }
     }
 }
