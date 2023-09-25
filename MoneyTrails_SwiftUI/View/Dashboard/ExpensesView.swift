@@ -37,7 +37,7 @@ struct ExpensesView: View {
         NavigationView {
             List {
                 ForEach(groupedExpenses, id: \.0) { date, expenses in
-                    Section(header: Text(formattedDate(date))) {
+                    Section(header: Text(formattedDate(date)).foregroundColor(.black)) {
                         ForEach(expenses) { expense in
                             ExpenseRowView(
                                 title: expense.title,
@@ -46,27 +46,27 @@ struct ExpensesView: View {
                                 date: formattedDate(expense.date)
                             )
                             .swipeActions {
-                                            Button(role: .destructive) { selectedExpense = expense } label: {
-                                                Label("Delete", systemImage: "trash")
-                                            }
-                                        }
+                                Button(role: .destructive) { selectedExpense = expense } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
                         }
                     }
                 }
             }
             .navigationTitle("Expenses")
             .alert(item: $selectedExpense) { expense in
-                            // Step 2: Confirmation alert
-                            Alert(
-                                title: Text("Confirm Deletion"),
-                                message: Text("Are you sure you want to delete this expense?"),
-                                primaryButton: .destructive(Text("Delete")) {
-                                    // Step 3: Call the deleteExpense function
-                                    deleteExpense(expense)
-                                },
-                                secondaryButton: .cancel()
-                            )
-                        }
+                // Step 2: Confirmation alert
+                Alert(
+                    title: Text("Confirm Deletion"),
+                    message: Text("Are you sure you want to delete this expense?"),
+                    primaryButton: .destructive(Text("Delete")) {
+                        // Step 3: Call the deleteExpense function
+                        deleteExpense(expense)
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
         }
         .onAppear {
             Task {

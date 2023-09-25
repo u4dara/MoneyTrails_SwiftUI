@@ -132,7 +132,6 @@ class AddExpenseViewModel: ObservableObject {
         
         if let currentUser = Auth.auth().currentUser {
             let userID = currentUser.uid
-            
             do {
                 let expenseRef = expensesCollection.document(expense.id)
                 try await expenseRef.delete()

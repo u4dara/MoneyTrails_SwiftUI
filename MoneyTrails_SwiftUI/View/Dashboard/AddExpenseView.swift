@@ -107,6 +107,7 @@ struct AddExpenseView: View {
                             .foregroundColor(.white)
                             .bold()
                     }.padding()
+                        .padding(.horizontal, 20)
                 }
                 Spacer()
             }

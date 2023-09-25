@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Category {
+    
     let categoryName: String
     let color: RGBColor
 }

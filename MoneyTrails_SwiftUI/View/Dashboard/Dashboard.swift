@@ -12,7 +12,7 @@ struct Dashboard: View {
         TabView {
             ExpensesView()
                 .tabItem{
-                    Label("Expenses", systemImage: "tray.and.arrow.up.fill")
+                    Label("Expenses", systemImage: "chart.bar.doc.horizontal.fill")
                 }
             
             ReportsView()
@@ -29,7 +29,7 @@ struct Dashboard: View {
                 .tabItem{
                     Label("Settings", systemImage: "gearshape.fill")
                 }
-        }
+        }.accentColor(Color("CPurple"))
     }
 }
 

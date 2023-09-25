@@ -30,8 +30,9 @@ struct CategoriesView: View {
                             .font(.headline)
                         
                         Spacer()
-                        
-                        Button{
+                    }
+                    .swipeActions {
+                        Button(role: .destructive) {
                             Task {
                                     do {
                                         try await CategoryviewModel.deleteCategory(category)
@@ -39,14 +40,14 @@ struct CategoriesView: View {
                                         print("Error deleting category: \(error.localizedDescription)")
                                     }
                                 }
-                        }label: {
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
                         }
                     }
                 
                 
-            }.onAppear{
+            }
+            .onAppear{
                 Task {
                         do {
                             CategoryviewModel.categories = try await CategoryviewModel.retrieveCategories()
@@ -113,8 +114,9 @@ struct CategoriesView: View {
                 
                 
             }.padding().padding(.bottom, 10)
+                
         }
-            .navigationTitle("Categories")
+        .navigationTitle("Categories")
     }
 }
 

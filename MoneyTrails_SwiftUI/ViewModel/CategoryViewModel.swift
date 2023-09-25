@@ -145,7 +145,7 @@ class CategoryViewModel : ObservableObject {
                         let categoryDocument = querySnapshot.documents[0]
                         try await categoryDocument.reference.delete()
                         print("Category deleted successfully.")
-                        updateCategories()
+                        
                     }
                 } catch {
                     throw error // Rethrow any errors that occur during the deletion

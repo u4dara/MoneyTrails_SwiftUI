@@ -26,9 +26,9 @@ struct ExpenseRowView: View {
                             .foregroundColor(.white)
                             .background(
                                 Capsule()
-                                    .fill(Color.gray)
-                                    .opacity(0.7)
-                                    .frame(height: 30)
+                                    .fill(Color("CPurple"))
+                                    .opacity(0.8)
+                                    .frame(height: 23)
                             )
                         
                     }
@@ -41,7 +41,7 @@ struct ExpenseRowView: View {
                             
                         
                         Text(date)
-                            .font(.headline)
+                            .font(.caption)
                             .foregroundColor(.gray)
                     }
                 }
