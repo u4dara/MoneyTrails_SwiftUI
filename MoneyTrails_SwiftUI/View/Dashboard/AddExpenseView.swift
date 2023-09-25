@@ -17,7 +17,7 @@ struct AddExpenseView: View {
     @State private var selectedCategory: String = ""
     @State private var amount = ""
     @State private var date = Date()
-    @State private var note = ""
+    @State private var title = ""
     
     @State private var showingSuccessAlert = false
     
@@ -39,6 +39,14 @@ struct AddExpenseView: View {
             VStack {
             
                 List {
+                    HStack {
+                        Text("Title")
+                        Spacer()
+                        TextField("Expense Title", text: $title)
+                            .multilineTextAlignment(.trailing)
+                            .submitLabel(.done)
+                    }
+                    
                     
                     HStack {
                         Text("Amount ($)")
@@ -67,21 +75,14 @@ struct AddExpenseView: View {
                                 ForEach(categoryNames, id: \.self) { category in
                                     Text(category).tag(category)
                                 }
-                            }
+                            }.pickerStyle(.menu)
+                                .foregroundColor(.black)
                         }
                         else {
                             Text("No categories available")
                                 .foregroundColor(.gray)
                         }
                         
-                    }
-                    
-                    HStack {
-                        Text("Note")
-                        Spacer()
-                        TextField("Note", text: $note)
-                            .multilineTextAlignment(.trailing)
-                            .submitLabel(.done)
                     }
                 }
                 .scrollContentBackground(.hidden)
@@ -91,7 +92,7 @@ struct AddExpenseView: View {
                 Button {
                     Task {
                             do {
-                                try await addExpenseViewModel.addExpense(amount: amount, date: date, category: selectedCategory , note: note)
+                                try await addExpenseViewModel.addExpense(amount: amount, date: date, category: selectedCategory , title: title)
                                 showingSuccessAlert = true
                             } catch {
                                 print("Error adding expense: \(error.localizedDescription)")

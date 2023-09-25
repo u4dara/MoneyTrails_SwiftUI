@@ -7,11 +7,20 @@
 
 import Foundation
 
-struct Expense {
-    var id: String?
-    var expenseName: String
-    var amount: Double
+struct Expense: Identifiable {
+    var id: String
+    var title: String
+    var amount: String
     var date: Date
-    var category: Category
+    var category: String
     var userID: String
+    
+    init(id: String, title: String, category: String, amount: String, date: Date, userID: String) {
+            self.id = id
+            self.title = title
+            self.category = category
+            self.amount = amount
+            self.date = date
+            self.userID = userID
+        }
 }
