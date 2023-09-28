@@ -10,12 +10,16 @@ import SwiftUI
 struct SettingsView: View {
     
     @EnvironmentObject var viewModel : AuthViewModel
+    @EnvironmentObject var categoryViewModel : CategoryViewModel
+    
+    @State private var showingConfirmationAlert = false
+    @State private var redirectToOnboarding = false
     
     var body: some View {
         NavigationView{
             List{
                 Section("Categories"){
-                    // All Categories Tab Item
+
                     NavigationLink {
                         CategoriesView()
                     } label: {
@@ -32,7 +36,7 @@ struct SettingsView: View {
                     
                     // Delete all categoriess button
                     Button(role : .destructive){
-                        
+                        showingConfirmationAlert = true
                     } label: {
                         HStack(spacing: 12) {
                             Image(systemName: "trash.circle.fill")
@@ -42,6 +46,25 @@ struct SettingsView: View {
                             Text("Erase all Data")
                                 .font(.headline)
                         }
+                    }
+                    .alert(isPresented: $showingConfirmationAlert) {
+                        Alert(
+                            title: Text("Confirm Deletion"),
+                            message: Text("Are you sure you want to delete all categories? This action cannot be undone."),
+                            primaryButton: .destructive(Text("Delete")) {
+                                // Call the deleteAllCategoriesForCurrentUser() method
+                                Task {
+                                    do {
+                                        try await categoryViewModel.deleteAllCategoriesForCurrentUser()
+                                        // Handle success, e.g., show an alert
+                                    } catch {
+                                        // Handle the error, e.g., show an error message
+                                        print("Error deleting categories: \(error.localizedDescription)")
+                                    }
+                                }
+                            },
+                            secondaryButton: .cancel()
+                        )
                     }
                 }
                 
@@ -85,7 +108,7 @@ struct SettingsView: View {
                         }
                         
                         Button {
-                            print("Sign out")
+                            showingConfirmationAlert = true
                         } label: {
                             HStack(spacing: 12){
                                 Image(systemName: "xmark.bin.circle.fill")
@@ -98,6 +121,31 @@ struct SettingsView: View {
                                     .foregroundColor(.black)
                             }
                         }
+                        .alert(isPresented: $showingConfirmationAlert) {
+                            Alert(
+                                title: Text("Confirm Deletion"),
+                                message: Text("Are you sure you want to delete your account? This action cannot be undone."),
+                                primaryButton: .destructive(Text("Delete")) {
+                                    // Call the deleteAccount method
+                                    Task {
+                                        do {
+                                            try await viewModel.deleteUserAccount()
+                                            print("User account deleted successfully")
+                                        } catch {
+                                            print("Error deleting user account: \(error.localizedDescription)")
+                                        }
+                                    }
+                                },
+                                secondaryButton: .cancel()
+                            )
+                        }
+                        .background(
+                            NavigationLink(
+                                destination: Onboarding(),
+                                isActive: $redirectToOnboarding,
+                                label: { EmptyView() }
+                            )
+                        )
 
                     }
                 }

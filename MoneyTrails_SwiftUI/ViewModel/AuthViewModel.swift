@@ -26,6 +26,7 @@ class AuthViewModel : ObservableObject {
         }
     }
     
+    // User Login Function
     func signIn(withEmail email : String, password : String) async throws {
         do{
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
@@ -38,6 +39,7 @@ class AuthViewModel : ObservableObject {
         }
     }
     
+    // User Creation Function
     func createUser(withEmail email : String, password : String, fullname : String) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -54,6 +56,7 @@ class AuthViewModel : ObservableObject {
         }
     }
     
+    // User Logout Function
     func signOut() {
         do {
             try Auth.auth().signOut()
@@ -65,6 +68,21 @@ class AuthViewModel : ObservableObject {
         }
     }
     
+    // Delete User Account
+    func deleteUserAccount() async throws {
+        if let user = Auth.auth().currentUser {
+            do {
+                try await user.delete()
+            } catch {
+                throw error
+            }
+        } else {
+            throw NSError(domain: "YourAppErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No user is currently signed in."])
+        }
+    }
+
+    
+    // Fetch login user Function
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         

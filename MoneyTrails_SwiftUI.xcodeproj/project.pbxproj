@@ -13,7 +13,7 @@
 		40047AA02AA4D3CC007D0816 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40047A9F2AA4D3CC007D0816 /* Preview Assets.xcassets */; };
 		401BD13B2AAF51E8003AC0E3 /* ExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401BD13A2AAF51E8003AC0E3 /* ExpensesView.swift */; };
 		401BD13D2AAF54AC003AC0E3 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401BD13C2AAF54AC003AC0E3 /* Dashboard.swift */; };
-		401BD13F2AAF56F2003AC0E3 /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401BD13E2AAF56F2003AC0E3 /* ReportsView.swift */; };
+		401BD13F2AAF56F2003AC0E3 /* DashnoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401BD13E2AAF56F2003AC0E3 /* DashnoardView.swift */; };
 		402FD1F12AA5FECD00C344EB /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402FD1F02AA5FECD00C344EB /* RegisterView.swift */; };
 		402FD1F72AA6051700C344EB /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402FD1F62AA6051700C344EB /* Onboarding.swift */; };
 		404CBE912AA7297C00C90F3C /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404CBE902AA7297C00C90F3C /* ForgotPasswordView.swift */; };
@@ -28,8 +28,9 @@
 		404E3C5D2AC04354001C78CA /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E3C5C2AC04354001C78CA /* ColorModel.swift */; };
 		404E3C612AC04DA5001C78CA /* ExpenseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E3C602AC04DA5001C78CA /* ExpenseModel.swift */; };
 		404E3C632AC07BEF001C78CA /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E3C622AC07BEF001C78CA /* AddExpenseView.swift */; };
-		404E3C652AC07F87001C78CA /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E3C642AC07F87001C78CA /* AddExpenseViewModel.swift */; };
+		404E3C652AC07F87001C78CA /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E3C642AC07F87001C78CA /* ExpenseViewModel.swift */; };
 		404E3C672AC18D09001C78CA /* ExpenseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E3C662AC18D09001C78CA /* ExpenseRowView.swift */; };
+		404E3C6E2AC5D832001C78CA /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 404E3C6D2AC5D832001C78CA /* SwiftUICharts */; };
 		409F3D3D2AAF59F000967995 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409F3D3C2AAF59F000967995 /* SettingsView.swift */; };
 		409F3D3F2AAF6C4F00967995 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409F3D3E2AAF6C4F00967995 /* CategoriesView.swift */; };
 		409F3D442AAF80B900967995 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409F3D432AAF80B900967995 /* CategoryModel.swift */; };
@@ -46,7 +47,7 @@
 		40047A9F2AA4D3CC007D0816 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		401BD13A2AAF51E8003AC0E3 /* ExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesView.swift; sourceTree = "<group>"; };
 		401BD13C2AAF54AC003AC0E3 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
-		401BD13E2AAF56F2003AC0E3 /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsView.swift; sourceTree = "<group>"; };
+		401BD13E2AAF56F2003AC0E3 /* DashnoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashnoardView.swift; sourceTree = "<group>"; };
 		402FD1F02AA5FECD00C344EB /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		402FD1F62AA6051700C344EB /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		404CBE902AA7297C00C90F3C /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -57,7 +58,7 @@
 		404E3C5C2AC04354001C78CA /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
 		404E3C602AC04DA5001C78CA /* ExpenseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseModel.swift; sourceTree = "<group>"; };
 		404E3C622AC07BEF001C78CA /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
-		404E3C642AC07F87001C78CA /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
+		404E3C642AC07F87001C78CA /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
 		404E3C662AC18D09001C78CA /* ExpenseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRowView.swift; sourceTree = "<group>"; };
 		409F3D3C2AAF59F000967995 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		409F3D3E2AAF6C4F00967995 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 				404CBEA02AA7825700C90F3C /* FirebaseStorage in Frameworks */,
 				404CBE9C2AA7825700C90F3C /* FirebaseFirestore in Frameworks */,
 				404CBE9E2AA7825700C90F3C /* FirebaseFirestoreSwift in Frameworks */,
+				404E3C6E2AC5D832001C78CA /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +141,7 @@
 				409F3D422AAF74D600967995 /* SubViews */,
 				401BD13A2AAF51E8003AC0E3 /* ExpensesView.swift */,
 				401BD13C2AAF54AC003AC0E3 /* Dashboard.swift */,
-				401BD13E2AAF56F2003AC0E3 /* ReportsView.swift */,
+				401BD13E2AAF56F2003AC0E3 /* DashnoardView.swift */,
 				409F3D3C2AAF59F000967995 /* SettingsView.swift */,
 				404E3C622AC07BEF001C78CA /* AddExpenseView.swift */,
 			);
@@ -181,7 +183,7 @@
 			children = (
 				404CBEA12AA782B900C90F3C /* AuthViewModel.swift */,
 				409F3D452AAF8B3A00967995 /* CategoryViewModel.swift */,
-				404E3C642AC07F87001C78CA /* AddExpenseViewModel.swift */,
+				404E3C642AC07F87001C78CA /* ExpenseViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -207,6 +209,7 @@
 				404CBE9B2AA7825700C90F3C /* FirebaseFirestore */,
 				404CBE9D2AA7825700C90F3C /* FirebaseFirestoreSwift */,
 				404CBE9F2AA7825700C90F3C /* FirebaseStorage */,
+				404E3C6D2AC5D832001C78CA /* SwiftUICharts */,
 			);
 			productName = MoneyTrails_SwiftUI;
 			productReference = 40047A952AA4D3CB007D0816 /* MoneyTrails_SwiftUI.app */;
@@ -238,6 +241,7 @@
 			mainGroup = 40047A8C2AA4D3CB007D0816;
 			packageReferences = (
 				404CBE982AA7825700C90F3C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				404E3C6C2AC5D832001C78CA /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 40047A962AA4D3CB007D0816 /* Products */;
 			projectDirPath = "";
@@ -268,7 +272,7 @@
 			files = (
 				404CBE932AA748D300C90F3C /* ProfileView.swift in Sources */,
 				404E3C672AC18D09001C78CA /* ExpenseRowView.swift in Sources */,
-				404E3C652AC07F87001C78CA /* AddExpenseViewModel.swift in Sources */,
+				404E3C652AC07F87001C78CA /* ExpenseViewModel.swift in Sources */,
 				402FD1F12AA5FECD00C344EB /* RegisterView.swift in Sources */,
 				401BD13D2AAF54AC003AC0E3 /* Dashboard.swift in Sources */,
 				404CBE912AA7297C00C90F3C /* ForgotPasswordView.swift in Sources */,
@@ -280,7 +284,7 @@
 				404CBEA22AA782B900C90F3C /* AuthViewModel.swift in Sources */,
 				404CBE952AA7536700C90F3C /* UserModel.swift in Sources */,
 				404E3C5D2AC04354001C78CA /* ColorModel.swift in Sources */,
-				401BD13F2AAF56F2003AC0E3 /* ReportsView.swift in Sources */,
+				401BD13F2AAF56F2003AC0E3 /* DashnoardView.swift in Sources */,
 				409F3D462AAF8B3A00967995 /* CategoryViewModel.swift in Sources */,
 				40EA412F2ABEEC5F00B91A05 /* ColorExtentions.swift in Sources */,
 				40047A992AA4D3CB007D0816 /* MoneyTrails_SwiftUIApp.swift in Sources */,
@@ -498,6 +502,14 @@
 				kind = branch;
 			};
 		};
+		404E3C6C2AC5D832001C78CA /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -520,6 +532,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 404CBE982AA7825700C90F3C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		404E3C6D2AC5D832001C78CA /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 404E3C6C2AC5D832001C78CA /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

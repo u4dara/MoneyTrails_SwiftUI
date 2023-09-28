@@ -40,7 +40,7 @@ class CategoryViewModel : ObservableObject {
                 "blue": rgbColor.blue
             ]
             
-            // Use Firestore's asynchronous method to add the document
+            
             do {
                 _ = try await colorsCollection.addDocument(data: [
                     "userID": userID,
@@ -55,7 +55,7 @@ class CategoryViewModel : ObservableObject {
             
         }
         else {
-            // No user is signed in, handle this case as needed
+            
             print("No user is signed in.")
         }
         
@@ -71,7 +71,7 @@ class CategoryViewModel : ObservableObject {
         if let currentUser = Auth.auth().currentUser {
             let userID = currentUser.uid
             
-            // Create a query to retrieve documents where the 'userID' field matches the current user's UID
+            
             let query = colorsCollection.whereField("userID", isEqualTo: userID)
             
             do {
@@ -96,7 +96,6 @@ class CategoryViewModel : ObservableObject {
                 throw error
             }
         } else {
-            // No user is signed in, handle this case as needed
             throw ErrorType.userNotLoggedIn
         }
     }
@@ -122,8 +121,6 @@ class CategoryViewModel : ObservableObject {
             if let index = categories.firstIndex(where: { $0.categoryName == category.categoryName }) {
                 categories.remove(at: index)
             }
-
-            // Add code here to delete the category from Firestore
             let db = Firestore.firestore()
             let currentUser = Auth.auth().currentUser
 
@@ -132,27 +129,56 @@ class CategoryViewModel : ObservableObject {
                 // Get a reference to the 'categories' collection
                 let categoriesCollection = db.collection("categories")
 
-                // Create a query to find the category document based on some criteria (e.g., categoryName)
+                
                 let query = categoriesCollection.whereField("categoryName", isEqualTo: category.categoryName)
                 
                 do {
-                    // Use await to retrieve the query snapshot
                     let querySnapshot = try await query.getDocuments()
                     
                     // Check if there are any matching documents
                     if !querySnapshot.isEmpty {
-                        // Assuming there's only one matching document, delete it
+                        // Assuming there's only one matching document
                         let categoryDocument = querySnapshot.documents[0]
                         try await categoryDocument.reference.delete()
                         print("Category deleted successfully.")
                         
                     }
                 } catch {
-                    throw error // Rethrow any errors that occur during the deletion
+                    throw error
                 }
             } else {
                 print("No user is signed in.")
             }
         }
+    
+    
+    // Function to delete all categories for the current user
+    func deleteAllCategoriesForCurrentUser() async throws {
+        let db = Firestore.firestore()
+        let categoriesCollection = db.collection("categories")
+        
+        if let currentUser = Auth.auth().currentUser {
+            let userID = currentUser.uid
+            
+            
+            let query = categoriesCollection.whereField("userID", isEqualTo: userID)
+            
+            do {
+                let querySnapshot = try await query.getDocuments()
+                
+                for document in querySnapshot.documents {
+                    let documentID = document.documentID
+                    try await categoriesCollection.document(documentID).delete()
+                }
+                
+                print("Categories deleted successfully!")
+                
+            } catch {
+                throw error
+            }
+        } else {
+            throw ErrorType.userNotLoggedIn
+        }
+    }
     
 }

@@ -9,24 +9,24 @@ import SwiftUI
 
 struct ExpensesView: View {
     
-    @EnvironmentObject var addExpenseViewModel: AddExpenseViewModel
+    @EnvironmentObject var ExpenseViewModel: ExpenseViewModel
     
     @State private var selectedExpense: Expense?
     
     private func fetchExpenses() async {
-        await addExpenseViewModel.fetchExpenses()
+        await ExpenseViewModel.fetchExpenses()
     }
     
     private func formattedDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy" // Customize the date format as needed
+        dateFormatter.dateFormat = "MMM dd, yyyy"
         return dateFormatter.string(from: date)
     }
     
     private func deleteExpense(_ expense: Expense) {
             Task {
                 do {
-                    try await addExpenseViewModel.deleteExpense(expense)
+                    try await ExpenseViewModel.deleteExpense(expense)
                 } catch {
                     print("Error deleting expense: \(error.localizedDescription)")
                 }
@@ -56,12 +56,10 @@ struct ExpensesView: View {
             }
             .navigationTitle("Expenses")
             .alert(item: $selectedExpense) { expense in
-                // Step 2: Confirmation alert
                 Alert(
                     title: Text("Confirm Deletion"),
                     message: Text("Are you sure you want to delete this expense?"),
                     primaryButton: .destructive(Text("Delete")) {
-                        // Step 3: Call the deleteExpense function
                         deleteExpense(expense)
                     },
                     secondaryButton: .cancel()
@@ -77,7 +75,7 @@ struct ExpensesView: View {
     
     // Helper property to group expenses by date
     private var groupedExpenses: [(Date, [Expense])] {
-        let groupedDictionary = Dictionary(grouping: addExpenseViewModel.expenses, by: { Calendar.current.startOfDay(for: $0.date) })
+        let groupedDictionary = Dictionary(grouping: ExpenseViewModel.expenses, by: { Calendar.current.startOfDay(for: $0.date) })
         return groupedDictionary.sorted { $0.key > $1.key }
     }
 }

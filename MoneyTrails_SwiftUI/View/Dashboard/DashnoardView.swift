@@ -6,18 +6,41 @@
 //
 
 import SwiftUI
+import Charts
+import SwiftUICharts
 
-struct ReportsView: View {
+struct DashnoardView: View {
     
-    @EnvironmentObject var addExpenseViewModel: AddExpenseViewModel
-    
+    @EnvironmentObject var ExpenseViewModel: ExpenseViewModel
+
     @State private var selectedExpense: Expense?
+    
+    // Calculate the expenses by category for the current month
+    private var expensesByCategory: [(String, Double)] {
+        let currentDate = Date()
+        let currentMonth = Calendar.current.component(.month, from: currentDate)
+
+        let currentMonthExpenses = ExpenseViewModel.expenses.filter { expense in
+            let expenseMonth = Calendar.current.component(.month, from: expense.date)
+            return expenseMonth == currentMonth
+        }
+
+        // Calculate the total expenses by category
+        let expensesGroupedByCategory = Dictionary(grouping: currentMonthExpenses, by: { $0.category })
+
+        let expensesByCategory = expensesGroupedByCategory.map { (category, expenses) in
+            let totalAmount = expenses.reduce(0.00) { $0 + Double($1.amount)! }
+            return (category, totalAmount)
+        }
+
+        return expensesByCategory
+    }
     
     private var totalExpensesForCurrentMonth: Double {
         let currentDate = Date()
         let currentMonth = Calendar.current.component(.month, from: currentDate)
         
-        let currentMonthExpenses = addExpenseViewModel.expenses.filter { expense in
+        let currentMonthExpenses = ExpenseViewModel.expenses.filter { expense in
             let expenseMonth = Calendar.current.component(.month, from: expense.date)
             return expenseMonth == currentMonth
         }
@@ -26,7 +49,6 @@ struct ReportsView: View {
             if let amount = Double(expense.amount) {
                 return total + amount
             } else {
-                // Handle cases where the amount is not a valid Double (e.g., display an error or use a default value)
                 return total
             }
         }
@@ -35,14 +57,14 @@ struct ReportsView: View {
     
     private func formattedDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy" // Customize the date format as needed
+        dateFormatter.dateFormat = "MMM dd, yyyy"
         return dateFormatter.string(from: date)
     }
     
     private func deleteExpense(_ expense: Expense) {
             Task {
                 do {
-                    try await addExpenseViewModel.deleteExpense(expense)
+                    try await ExpenseViewModel.deleteExpense(expense)
                 } catch {
                     print("Error deleting expense: \(error.localizedDescription)")
                 }
@@ -52,14 +74,14 @@ struct ReportsView: View {
     private var currentMonthExpenses: [Expense] {
         let currentDate = Date()
         let currentMonth = Calendar.current.component(.month, from: currentDate)
-        return addExpenseViewModel.expenses.filter { expense in
+        return ExpenseViewModel.expenses.filter { expense in
             let expenseMonth = Calendar.current.component(.month, from: expense.date)
             return expenseMonth == currentMonth
         }
     }
     
     private func fetchExpenses() async {
-        await addExpenseViewModel.fetchExpenses()
+        await ExpenseViewModel.fetchExpenses()
     }
     
     var body: some View {
@@ -68,9 +90,9 @@ struct ReportsView: View {
                 Text("Total Expenses This Month : $\(totalExpensesForCurrentMonth, specifier: "%.2f")")
                     .font(.headline)
                     .padding()
-                
                 List {
-                    Section(header: Text("Current Month Expenses")) {
+                    
+                    Section(header: Text("This Month Expenses")) {
                         ForEach(currentMonthExpenses) { expense in
                             ExpenseRowView(
                                 title: expense.title,
@@ -88,19 +110,17 @@ struct ReportsView: View {
                         }
                     }
                 }
-                .navigationTitle("Expense Report")
+                .navigationTitle("Dashboard")
                 .alert(item: $selectedExpense) { expense in
-                                // Step 2: Confirmation alert
-                                Alert(
-                                    title: Text("Confirm Deletion"),
-                                    message: Text("Are you sure you want to delete this expense?"),
-                                    primaryButton: .destructive(Text("Delete")) {
-                                        // Step 3: Call the deleteExpense function
-                                        deleteExpense(expense)
-                                    },
-                                    secondaryButton: .cancel()
-                                )
-                            }
+                    Alert(
+                        title: Text("Confirm Deletion"),
+                        message: Text("Are you sure you want to delete this expense?"),
+                        primaryButton: .destructive(Text("Delete")) {
+                            deleteExpense(expense)
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
             }
             .onAppear {
                 Task {
@@ -112,7 +132,7 @@ struct ReportsView: View {
     
     struct ReportsView_Previews: PreviewProvider {
         static var previews: some View {
-            ReportsView()
+            DashnoardView()
         }
     }
 }

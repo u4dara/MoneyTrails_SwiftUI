@@ -10,14 +10,14 @@ import SwiftUI
 struct Dashboard: View {
     var body: some View {
         TabView {
+            DashnoardView()
+                .tabItem{
+                    Label("Dashboard", systemImage: "chart.bar.fill")
+                }
+            
             ExpensesView()
                 .tabItem{
                     Label("Expenses", systemImage: "chart.bar.doc.horizontal.fill")
-                }
-            
-            ReportsView()
-                .tabItem{
-                    Label("Reports", systemImage: "chart.bar.fill")
                 }
             
             AddExpenseView()

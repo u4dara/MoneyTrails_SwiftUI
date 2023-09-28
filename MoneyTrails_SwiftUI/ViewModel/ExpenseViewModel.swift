@@ -12,7 +12,7 @@ import FirebaseFirestore
 import FirebaseAuth
 
 @MainActor
-class AddExpenseViewModel: ObservableObject {
+class ExpenseViewModel: ObservableObject {
     
     @Published var expenses : [Expense] = []
     
@@ -24,7 +24,6 @@ class AddExpenseViewModel: ObservableObject {
         if let currentUser = Auth.auth().currentUser {
             let userID = currentUser.uid
             
-            // Create a query to retrieve documents where the 'userID' field matches the current user's UID
             let query = colorsCollection.whereField("userID", isEqualTo: userID)
             
             do {
@@ -42,7 +41,6 @@ class AddExpenseViewModel: ObservableObject {
                 throw error
             }
         } else {
-            // No user is signed in, handle this case as needed
             throw ErrorType.userNotLoggedIn
         }
     }
@@ -56,14 +54,14 @@ class AddExpenseViewModel: ObservableObject {
             let userID = currentUser.uid
             
             let expenseData = [
-                "amount": amount,
+                "amount": amount+".00",
                 "date": date,
                 "category": category,
                 "title": title,
                 "userID": userID
             ] as [String : Any]
             
-            // Use Firestore's asynchronous method to add the document
+            
             do {
                 _ = try await expensesCollection.addDocument(data: expenseData)
                 print("Expense added to Firestore successfully!")
@@ -71,7 +69,6 @@ class AddExpenseViewModel: ObservableObject {
                 throw error
             }
         } else {
-            // No user is signed in, handle this case as needed
             throw ErrorType.userNotLoggedIn
         }
     }
@@ -89,7 +86,6 @@ class AddExpenseViewModel: ObservableObject {
             do {
                 _ = try await expensesCollection.whereField("userID", isEqualTo: userID).getDocuments()
                 
-                // Use Task to switch back to the main thread
                 Task {
                     do {
                         let querySnapshot = try await expensesCollection.whereField("userID", isEqualTo: userID).getDocuments()
@@ -108,7 +104,7 @@ class AddExpenseViewModel: ObservableObject {
                                 let date = dateTimestamp.dateValue()
                                 let expense = Expense(id: id, title: title, category: category, amount: amount, date: date, userID: userID)
                                 
-                                // Print the expense object
+                                
                                 print("Fetched Expense: \(expense)")
                                 
                                 return expense
@@ -143,7 +139,7 @@ class AddExpenseViewModel: ObservableObject {
                 throw error
             }
         } else {
-            // No user is signed in, handle this case as needed
+            
             throw ErrorType.userNotLoggedIn
         }
     }
