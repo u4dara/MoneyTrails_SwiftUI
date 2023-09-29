@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Expense: Identifiable {
+struct Expense: Identifiable, Hashable {
     var id: String
     var title: String
     var amount: String

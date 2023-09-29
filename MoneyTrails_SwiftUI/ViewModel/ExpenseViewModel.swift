@@ -15,6 +15,12 @@ import FirebaseAuth
 class ExpenseViewModel: ObservableObject {
     
     @Published var expenses : [Expense] = []
+    @Published var currentMonthExpenses: [ExpenseData] = []
+    
+    struct ExpenseData {
+        let category: String
+        let amount: Double
+    }
     
     // Retrieve category names from db
     func retrieveCategoryNames() async throws -> [String] {
@@ -144,6 +150,45 @@ class ExpenseViewModel: ObservableObject {
         }
     }
 
+    // Create an array contain [category, ammount] pair
+    func getExpensesForCurrentUser() async throws -> [(category: String, amount: Double)] {
+        guard let currentUser = Auth.auth().currentUser else {
+            // User is not logged in, handle accordingly
+            return []
+        }
+
+        let db = Firestore.firestore()
+        let expensesCollection = db.collection("expenses")
+
+        do {
+            let querySnapshot = try await expensesCollection
+                .whereField("userID", isEqualTo: currentUser.uid)
+                .getDocuments()
+
+            var result: [(category: String, amount: Double)] = []
+
+            for document in querySnapshot.documents {
+                let data = document.data() // No need for optional binding here
+
+                if let category = data["category"] as? String,
+                   let amountString = data["amount"] as? String,
+                   let amount = Double(amountString) {
+                    result.append((category: category, amount: amount))
+                }
+            }
+
+            return result
+        } catch {
+            // Handle the error
+            print("Error fetching expenses: \(error.localizedDescription)")
+            throw error
+        }
+    }
+    
+    
+    
 
 
+
+    
 }

@@ -7,13 +7,14 @@
 
 import SwiftUI
 import Charts
-import SwiftUICharts
 
 struct DashnoardView: View {
     
     @EnvironmentObject var ExpenseViewModel: ExpenseViewModel
 
     @State private var selectedExpense: Expense?
+    @State private var expenses: [(category: String, amount: Double)] = []
+    @State private var isViewVisible = false
     
     // Calculate the expenses by category for the current month
     private var expensesByCategory: [(String, Double)] {
@@ -90,41 +91,60 @@ struct DashnoardView: View {
                 Text("Total Expenses This Month : $\(totalExpensesForCurrentMonth, specifier: "%.2f")")
                     .font(.headline)
                     .padding()
-                List {
-                    
-                    Section(header: Text("This Month Expenses")) {
-                        ForEach(currentMonthExpenses) { expense in
-                            ExpenseRowView(
-                                title: expense.title,
-                                category: expense.category,
-                                amount: String(expense.amount),
-                                date: formattedDate(expense.date)
-                            )
-                            .swipeActions {
-                                Button(role: .destructive) {
-                                    selectedExpense = expense
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
+                
+                    List {
+                        Chart{
+                            ForEach(expenses, id: \.category) { expense in
+                                BarMark(x: .value("Category", expense.category), y: .value("Amount", expense.amount))
+                            }
+                        }
+                        .padding()
+                        
+                        
+                        Section(header: Text("This Month Expenses")) {
+                            ForEach(currentMonthExpenses) { expense in
+                                ExpenseRowView(
+                                    title: expense.title,
+                                    category: expense.category,
+                                    amount: String(expense.amount),
+                                    date: formattedDate(expense.date)
+                                )
+                                .swipeActions {
+                                    Button(role: .destructive) {
+                                        selectedExpense = expense
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
                             }
                         }
                     }
+                    .navigationTitle("Dashboard")
+                    .alert(item: $selectedExpense) { expense in
+                        Alert(
+                            title: Text("Confirm Deletion"),
+                            message: Text("Are you sure you want to delete this expense?"),
+                            primaryButton: .destructive(Text("Delete")) {
+                                deleteExpense(expense)
+                            },
+                            secondaryButton: .cancel()
+                        )
+                    }
                 }
-                .navigationTitle("Dashboard")
-                .alert(item: $selectedExpense) { expense in
-                    Alert(
-                        title: Text("Confirm Deletion"),
-                        message: Text("Are you sure you want to delete this expense?"),
-                        primaryButton: .destructive(Text("Delete")) {
-                            deleteExpense(expense)
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
+                
             }
             .onAppear {
                 Task {
                     await fetchExpenses()
+            
+                    do {
+                        expenses = try await ExpenseViewModel.getExpensesForCurrentUser()
+                        print(expenses)
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                    
+                    
                 }
             }
         }
@@ -135,4 +155,3 @@ struct DashnoardView: View {
             DashnoardView()
         }
     }
-}
