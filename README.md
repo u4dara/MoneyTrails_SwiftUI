@@ -1,7 +1,7 @@
 
 # MoneyTrail
 
-This is a iOS application for recording and tracking your day to day expenses.
+This is an iOS application for recording and tracking your day-to-day expenses.
 
 
 ## Screenshots
@@ -11,7 +11,7 @@ This is a iOS application for recording and tracking your day to day expenses.
 
 ## Demo
 
-Insert gif or link to demo
+[Insert gif or link to demo](https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/347cb2e1-1690-41ad-92e8-a503d6303f4a)
 
 
 ## Features
