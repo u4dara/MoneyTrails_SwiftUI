@@ -6,13 +6,13 @@ This is an iOS application for recording and tracking your day-to-day expenses.
 
 ## Screenshots
 
-![App Screenshot] (https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/18335a35-ca93-47f9-89a2-7943d10576bc)
-![App Screenshot] (https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/0485dc1c-53c6-49ff-8241-8293571ed6c7)
-![App Screenshot] (https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/176777fd-ce6f-4848-a270-7c66c282129d)
-![App Screenshot] (https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/89770a59-1737-416a-a465-db776d906850)
-![App Screenshot] (https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/825a7cd5-55ce-471f-9a25-85742833b1c7)
-![App Screenshot] (https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/4b4c758a-71fd-4917-8041-30675f853924)
-![App Screenshot] (https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/4f08b1a2-6d1f-4e62-a081-7f436b947b4a)
+![Screenshot 2023-10-15 at 22 18 05](https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/18335a35-ca93-47f9-89a2-7943d10576bc)
+![Screenshot 2023-10-15 at 22 18 12](https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/0485dc1c-53c6-49ff-8241-8293571ed6c7)
+![Screenshot 2023-10-15 at 22 18 29](https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/176777fd-ce6f-4848-a270-7c66c282129d)
+![Screenshot 2023-10-15 at 22 17 55](https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/89770a59-1737-416a-a465-db776d906850)
+![Screenshot 2023-10-15 at 22 09 17](https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/825a7cd5-55ce-471f-9a25-85742833b1c7)
+![Screenshot 2023-10-15 at 22 09 46](https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/4b4c758a-71fd-4917-8041-30675f853924)
+![Screenshot 2023-10-15 at 22 17 33](https://github.com/u4dara/MoneyTrails_SwiftUI/assets/39787352/4f08b1a2-6d1f-4e62-a081-7f436b947b4a)
 
 ## Demo
 
